@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Card, Carousel, Placeholder, Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import '../App.scss';
-import NavbarComponent from '../Component/NavbarComponent';
+// import NavbarComponent from '../Component/NavbarComponent';
 import FooterComponent from '../Component/FooterComponent';
 import NewNav from '../Component/NewNav';
 
@@ -58,7 +58,7 @@ export default function LandingPage() {
 
   useEffect(() => {
     // Fetch data
-    fetch(`https://json-server-vercel-tan-rho.vercel.app/categories`) // Trocar link  para Banco de dados
+    fetch(`https://json-server-vercel-tan-rho.vercel.app/categories`) 
       .then(response => response.json())
       .then(data => setNavData(data))
       .catch(error => console.error('Error fetching data:', error));
@@ -122,7 +122,7 @@ export default function LandingPage() {
         </Carousel>
 
 <Container >
-        <h2 className='text-center mt-5 mb-5'>Conheça nossa Linhas</h2>
+        <h2 className='text-center mt-5 mb-5'>Featured Products</h2>
         <Carousel interval={null} indicators={false} controls={true} id='line-products' className='m-4'>
       {chunkedData.map((categoryChunk, index) => (
         <Carousel.Item key={index}>

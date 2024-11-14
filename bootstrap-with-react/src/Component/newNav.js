@@ -57,21 +57,10 @@ const NewNav = ({ navData }) => {
 
   return (
     <div>
-      <Navbar className="top-navbar">
+      <Navbar className="top-navbar pt-4">
         <Container fluid className="d-flex justify-content-between">
-          <div className="d-flex align-items-center">
-            <Nav.Link className="text-white" href="#">
-              <img src="path-to-spanish-flag.png" alt="Spanish" style={{ width: '24px', marginRight: '8px' }} />
-            </Nav.Link>
-            <Nav.Link className="text-black" href="#"><i className="fa fa-search"></i></Nav.Link>
-            <Nav.Link className="text-black" href="#"><i className="fa fa-facebook"></i></Nav.Link>
-            <Nav.Link className="text-black" href="#"><i className="fa fa-linkedin"></i></Nav.Link>
-            <Nav.Link className="text-black" href="#"><i className="fa fa-youtube"></i></Nav.Link>
-            <Nav.Link className="text-black" href="#"><i className="fa fa-instagram"></i></Nav.Link>
-          </div>
-          <div>
-            <span className='text-white'>SP (11) 5078-1850 | SC (47) 3461-9444 | MG (31) 2519-4550</span>
-          </div>
+     
+        
         </Container>
       </Navbar>
 
@@ -98,7 +87,7 @@ const NewNav = ({ navData }) => {
                 className="position-relative"
               >
                 
-                <Nav.Link href="#" className="text-black">Produtos</Nav.Link>
+                <Nav.Link href="#" className="text-black">Products</Nav.Link>
                 {showMegaMenu && <MegaMenu categories={navData} />}
               </Nav.Item>
               <Nav.Item className="dropdown-custom"
@@ -108,7 +97,7 @@ const NewNav = ({ navData }) => {
 
 <NavDropdown
                   show={showDropdown}
-                  title={<span style={{ color: 'black' }}>Serviços</span>}
+                  title={<span style={{ color: 'black' }}>Services</span>}
                   id="basic-nav-dropdown"
                   className="text-black"
                 >
@@ -124,18 +113,14 @@ const NewNav = ({ navData }) => {
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav.Item>
+            
+       
               <Nav.Item>
-                <Nav.Link className="text-black" href="/OndeComprar">Onde Comprar</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link className="text-black" href="/Catalogo">Catálogos</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link className="text-black" href="/SobreNos">Sobre Nos</Nav.Link>
+                <Nav.Link className="text-black" href="/SobreNos">About Us</Nav.Link>
               </Nav.Item>
 
               <Nav.Item>
-                <Nav.Link className="text-black" href="/Contato">Contato</Nav.Link>
+                <Nav.Link className="text-black" href="/Contato">Contact Us</Nav.Link>
               </Nav.Item>
             </Nav>
           </Navbar.Collapse>
