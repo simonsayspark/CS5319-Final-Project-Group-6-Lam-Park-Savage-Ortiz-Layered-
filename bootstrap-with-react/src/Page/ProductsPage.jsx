@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { useNavigate, Link, useParams } from "react-router-dom";
 import minipaLogo from '../Images/minipaLogo.png';
-import NavbarComponent from '../Component/NavbarComponent';
+// import NavbarComponent from '../Component/NavbarComponent';
 import FooterComponent from '../Component/FooterComponent';
 
 export default function Products() {
@@ -59,7 +59,7 @@ export default function Products() {
     return (
         <div className="main-content">
             <div>
-                <NavbarComponent navData={navData} />
+                {/* <NavbarComponent navData={navData} /> */}
 
                 <Container>
                     <h2 className="mt-5">Products Page</h2>

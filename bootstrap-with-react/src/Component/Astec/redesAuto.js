@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap';
 import { useNavigate, Link, useParams } from "react-router-dom";
-import NavbarComponent from "../NavbarComponent";
+// import NavbarComponent from "../NavbarComponent";
 import FooterComponent from "../FooterComponent";
 import NavAss from "../NavAss";
 

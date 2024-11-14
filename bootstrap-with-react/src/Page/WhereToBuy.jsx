@@ -6,7 +6,7 @@ import { Form } from "react-bootstrap";
 import categoriesList from '../CategoriesJSON/productCategory.json';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import NavbarComponent from "../Component/NavbarComponent";
+// import NavbarComponent from "../Component/NavbarComponent";
 import FooterComponent from "../Component/FooterComponent";
 
 export default function WhereToBuy() {
@@ -63,7 +63,7 @@ export default function WhereToBuy() {
 
     return (
         <div className="main-content">
-            <NavbarComponent navData={navData} />
+            {/* <NavbarComponent navData={navData} /> */}
             <Container>
                 <h2 className="mt-5">This is the Where to buy page</h2>
                 

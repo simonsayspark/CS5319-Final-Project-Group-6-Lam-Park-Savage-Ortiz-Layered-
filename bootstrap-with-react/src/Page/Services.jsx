@@ -6,7 +6,6 @@ import { Form } from "react-bootstrap";
 import categoriesList from '../CategoriesJSON/productCategory.json';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import NavbarComponent from "../Component/NavbarComponent";
 import FooterComponent from "../Component/FooterComponent";
 
 export default function Services() {
@@ -63,7 +62,7 @@ export default function Services() {
 
     return (
         <div className="main-content">
-            <NavbarComponent navData={navData} />
+            {/* <NavbarComponent navData={navData} /> */}
             <Container>
 
                 <h2 className="mt-5">This is the services page</h2>

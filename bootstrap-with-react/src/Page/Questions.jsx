@@ -6,7 +6,7 @@ import { Form } from "react-bootstrap";
 import categoriesList from '../CategoriesJSON/productCategory.json';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import NavbarComponent from "../Component/NavbarComponent";
+// import NavbarComponent from "../Component/NavbarComponent";
 import FooterComponent from "../Component/FooterComponent";
 
 export default function Questions() {
@@ -59,7 +59,7 @@ export default function Questions() {
 
     return (
         <div className="main-content">
-            <NavbarComponent navData={navData} />
+            {/* <NavbarComponent navData={navData} /> */}
             <Container className="text-center">
                 <h1 className="mt-5 text-center">Perguntas Frequentes</h1>
                 <br />

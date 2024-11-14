@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Table, Container, Navbar, Nav, NavDropdown, Button, Image, InputGroup, Row, Col, Card, Form, Tab, Tabs, Carousel, Placeholder } from 'react-bootstrap';
 import minipaLogo from '../Images/minipaLogo.png';
-import NavbarComponent from '../Component/NavbarComponent';
+// import NavbarComponent from '../Component/NavbarComponent';
 import FooterComponent from '../Component/FooterComponent';
 import ProductTabs from '../Component/Astec/Tab';
 import '../App.scss';
@@ -133,7 +133,7 @@ const ProductTemplate = () => {
 
   return (
     <div>
-      <NavbarComponent navData={navData} />
+      {/* <NavbarComponent navData={navData} /> */}
 
       <div className='main-content'>
 
