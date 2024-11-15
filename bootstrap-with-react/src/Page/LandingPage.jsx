@@ -15,6 +15,7 @@ export default function LandingPage() {
   const [loading, setLoading] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  
 
   useEffect(() => {
     fetch(`https://json-server-vercel-tan-rho.vercel.app/categories`)

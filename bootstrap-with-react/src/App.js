@@ -31,8 +31,7 @@ function App() {
         <Route path="/Servicios/LaboratorioDeCalibracao" element={<LabCollab />} />
         <Route path="/Servicios/LocacaoInstrumentos" element={<LocacaoInstrumentos />} />\
         <Route path="/Servicios/RedeDeAutorizadas" element={<AuthorizedDealers />} />
-        <Route path="/Produtos" element={<ProductsPage />} /
->
+        <Route path="/Produtos" element={<ProductsPage />} />
         {categoriesData.map((category) => (
           <React.Fragment key={category.id}>
             <Route
@@ -51,7 +50,7 @@ function App() {
 
         {/* <Route path="/product/:productName" element={<ProductTemplate />} /> */}
         <Route path="/category/:categoryName/:subcategoryName/:productName/product" element={<ProductTemplate />} />
-
+        
       </Routes>
     </Router>
   );
