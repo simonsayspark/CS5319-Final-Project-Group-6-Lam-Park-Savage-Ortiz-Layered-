@@ -1,11 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Table, Container, Navbar, Nav, NavDropdown, Button, Image, InputGroup, Row, Col, Card, Form, Tab, Tabs, Carousel, Placeholder } from 'react-bootstrap';
-import minipaLogo from '../Images/minipaLogo.png';
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import {
+  Table,
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Button,
+  Image,
+  InputGroup,
+  Row,
+  Col,
+  Card,
+  Form,
+  Tab,
+  Tabs,
+  Carousel,
+  Placeholder,
+} from "react-bootstrap";
+import minipaLogo from "../Images/minipaLogo.png";
 // import NavbarComponent from '../Component/NavbarComponent';
-import FooterComponent from '../Component/FooterComponent';
-import ProductTabs from '../Component/Astec/Tab';
-import '../App.scss';
+import FooterComponent from "../Component/FooterComponent";
+import ProductTabs from "../Component/Astec/Tab";
+import "../App.scss";
+import NewNav from "../Component/NewNav";
 
 const ProductTemplate = () => {
   const { categoryName, subcategoryName, productName } = useParams();
@@ -15,103 +33,154 @@ const ProductTemplate = () => {
   const [categoryData, setCategoryData] = useState(null);
   const [imageExists, setImageExists] = useState(null);
 
-
   useEffect(() => {
-    fetch(`https://json-server-vercel-tan-rho.vercel.app/categories`)
-      .then(response => response.json())
-      .then(data => {
+    fetch(`/api/category`)
+      .then((response) => response.json())
+      .then((data) => {
         setNavData(data);
         setLoading(false);
       })
-      .catch(error => {
-        console.error('Error fetching data:', error);
+      .catch((error) => {
+        console.error("Error fetching data:", error);
         setLoading(false);
       });
   }, []);
 
   useEffect(() => {
-    if (categoryName && navData.length > 0) {
-      const formattedCategoryName = categoryName.replace(/-/g, ' ').toLowerCase();
-      const category = navData.find(cat => cat.name.toLowerCase() === formattedCategoryName);
+    if (categoryName && subcategoryName && productName && navData.length > 0) {
+      const formattedCategoryName = categoryName
+        .replace(/-/g, " ")
+        .toLowerCase();
+      const formattedSubcategoryName = subcategoryName
+        .replace(/-/g, " ")
+        .toLowerCase();
+      const formattedProductName = productName.replace(/-/g, " ").toLowerCase();
+
+      // Find the matching category
+      const category = navData.find(
+        (cat) =>
+          cat.name.toLowerCase().replace(/-/g, "").replace(/ /g, "") ===
+          formattedCategoryName.replace(/-/g, "").replace(/ /g, "")
+      );
 
       if (category) {
-        if (subcategoryName) {
-          const formattedSubcategoryName = subcategoryName.replace(/-/g, ' ').toLowerCase();
-          const subcategory = category.subcategories.find(subcat => subcat.name.toLowerCase() === formattedSubcategoryName);
+        // Find the matching animal type (subcategory)
+        const animalType = Object.keys(category.subcategory).find(
+          (type) => type.toLowerCase() === formattedSubcategoryName
+        );
 
-          if (subcategory) {
-            setCategoryData({ ...category, currentSubcategory: subcategory });
+        if (animalType) {
+          const subcategoryProducts = category.subcategory[animalType];
+
+          // Find the product in the subcategory's product list
+          const foundProduct = subcategoryProducts.find(
+            (product) =>
+              product.name.toLowerCase().replace(/-/g, " ") ===
+              formattedProductName
+          );
+
+          if (foundProduct) {
+            setProductData(foundProduct);
+            console.log("Found product:", foundProduct);
           } else {
-            console.error(`Subcategory not found: ${subcategoryName}`);
-            setCategoryData(category);
+            console.error("Product not found:", productName);
           }
         } else {
-          setCategoryData(category);
+          console.error(`Animal type not found: ${subcategoryName}`);
         }
       } else {
         console.error(`Category not found: ${categoryName}`);
       }
-    } else {
-      setCategoryData(null);
     }
-  }, [categoryName, subcategoryName, navData]);
+  }, [categoryName, subcategoryName, productName, navData]);
 
-  useEffect(() => {
-    fetch(`https://json-server-vercel-tan-rho.vercel.app/categories`)
-      .then(response => response.json())
-      .then(data => {
-        console.log('Fetched categories data:', data);
-        if (!Array.isArray(data)) {
-          throw new Error("Fetched data is not an array");
-        }
+  // useEffect(() => {
+  //   if (categoryName && navData.length > 0) {
+  //     const formattedCategoryName = categoryName
+  //       .replace(/-/g, " ")
+  //       .toLowerCase();
+  //     const category = navData.find(
+  //       (cat) =>
+  //         cat.name.toLowerCase().replace(/-/g, "").replace(/ /g, "") ===
+  //         formattedCategoryName.replace(/-/g, "").replace(/ /g, "")
+  //     );
 
-        let foundProduct = null;
+  //     if (category) {
+  //       if (subcategoryName) {
+  //         const formattedSubcategoryName = subcategoryName
+  //           .replace(/-/g, " ")
+  //           .toLowerCase();
+  //         const animalType = Object.keys(category.subcategory).find(
+  //           (type) => type.toLowerCase() === formattedSubcategoryName
+  //         );
 
-        data.forEach((category, categoryIndex) => {
-          if (!category || !Array.isArray(category.subcategories)) {
-            console.error(`Category at index ${categoryIndex} is invalid or has no subcategories:`, category);
-            return;
-          }
+  //         if (animalType) {
+  //           setCategoryData({ ...category, currentSubcategory: animalType });
+  //         } else {
+  //           console.error(`Subcategory not found: ${subcategoryName}`);
+  //           setCategoryData(category);
+  //         }
+  //       } else {
+  //         setCategoryData(category);
+  //       }
+  //     } else {
+  //       console.error(`Category not found: ${categoryName}`);
+  //     }
+  //   } else {
+  //     setCategoryData(null);
+  //   }
+  // }, [categoryName, subcategoryName, navData]);
 
-          console.log(`Processing category: ${category.name}`);
-          category.subcategories.forEach((subcategory, subcategoryIndex) => {
-            if (!subcategory || !Array.isArray(subcategory.products)) {
-              console.error(`Subcategory at index ${subcategoryIndex} in category ${category.name} is invalid or has no products:`, subcategory);
-              return;
-            }
+  // useEffect(() => {
+  //   if (categoryName && subcategoryName && productName) {
+  //     fetch(`/api/products`)
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         console.log("Fetched product data:", data);
+  //         if (!Array.isArray(data)) {
+  //           throw new Error("Fetched data is not an array");
+  //         }
 
-            console.log(`Processing subcategory: ${subcategory.name}`);
-            console.log(`Product name to match: ${productName.toLowerCase().replace(/-/g, ' ')}`);
-            console.log(`Product names in subcategory: ${subcategory.products.map(p => p.name.toLowerCase())}`);
+  //         // Format the URL parameters for comparison
+  //         const formattedCategoryName = categoryName
+  //           .replace(/-/g, " ")
+  //           .toLowerCase();
+  //         const formattedSubcategoryName = subcategoryName
+  //           .replace(/-/g, " ")
+  //           .toLowerCase();
+  //         const formattedProductName = productName
+  //           .replace(/-/g, " ")
+  //           .toLowerCase();
 
-            const product = subcategory.products.find(prod => prod.name.toLowerCase().replace(/-/g, ' ') === productName.toLowerCase().replace(/-/g, ' '));
+  //         // Find the matching product
+  //         const foundProduct = data.find(
+  //           (product) =>
+  //             product.category
+  //               .toLowerCase()
+  //               .replace(/-/g, "")
+  //               .replace(/ /g, "") ===
+  //               formattedCategoryName.replace(/-/g, "").replace(/ /g, "") &&
+  //             product.animalType.toLowerCase() === formattedSubcategoryName &&
+  //             product.name.toLowerCase().replace(/-/g, " ") ===
+  //               formattedProductName
+  //         );
 
+  //         if (foundProduct) {
+  //           setProductData(foundProduct);
+  //           console.log("Found product:", foundProduct);
+  //         } else {
+  //           console.error("Product not found:", productName);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching data:", error);
+  //       });
+  //   }
+  // }, [categoryName, subcategoryName, productName]);
 
-            console.log(`${categoryName.toUpperCase()}`);
-            console.log(`${subcategoryName.toUpperCase()}`);
-            console.log(`${productName.toUpperCase()}`);
-
-
-            if (product) {
-              foundProduct = product;
-              setProductData(product);
-              console.log('Found product:', product);
-            }
-          });
-        });
-
-        if (!foundProduct) {
-          console.error('Product not found:', productName);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, [productName]);
-
-  let findImage = null
+  let findImage = null;
   const imagePath = `/ProductImages/${categoryName.toUpperCase()}/${subcategoryName.toUpperCase()}/${productName.toUpperCase()}.jpg`;
-  const noImg=`https://placehold.co/600x400`;
+  const noImg = `https://placehold.co/600x400`;
 
   // if(Image){
   //   findImage = imagePath;
@@ -125,47 +194,63 @@ const ProductTemplate = () => {
     return <div>Loading...</div>;
   }
 
-  const { name, category, details } = productData;
-  
-
-  // const pathImage = imagePath && imagePath.trim() !== "" ? imagePath : noImg;
-  
+  const {
+    name,
+    animalType,
+    category,
+    description,
+    price,
+    brand,
+    availableStock,
+  } = productData;
 
   return (
     <div>
       {/* <NavbarComponent navData={navData} /> */}
-
-      <div className='main-content'>
-
+      <NewNav navData={navData} />
+      <div className="main-content">
         <Container className="mb-5 mt-5 d-flex flex-row justify-around">
+          <Col md={7} className="border-right">
+            <img
+              id="mainImage"
+              src={imagePath}
+              alt="Main Image"
+              fluid
+              style={{
+                margin: "5px auto",
+                objectFit: "Col",
+                maxHeight: "100vh",
+                minHeight: "30vh",
+              }}
+            />
+          </Col>
 
-<Col md={7} className='border-right' >
-<img id="mainImage" src={imagePath} alt="Main Image" fluid style={{ margin: '5px auto', objectFit:'Col', maxHeight:'100vh' , minHeight:'30vh' }}/>
-</Col>
+          <div className="flex flex-column ">
+            <h3 className="m-4 text-center">{name}</h3>
 
- 
-      <div className="d-flex flex-column"> 
+            <p>
+              <strong>Description:</strong> {description}
+            </p>
+            <p>
+              <strong>Price:</strong> ${price.toFixed(2)}
+            </p>
+            <p>
+              <strong>Brand:</strong> {brand}
+            </p>
 
-        <h3 className='m-4 text-center'>{name}</h3>
-        <p className='text-lg'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio modi rerum, harum ea totam asperiores eligendi architecto ut, molestiae eum velit optio labore dolorem possimus voluptatem quaerat deserunt delectus ipsam.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio modi rerum, harum ea totam asperiores eligendi architecto ut, molestiae eum velit optio labore dolorem possimus voluptatem quaerat deserunt delectus ipsam.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio modi rerum, harum ea totam asperiores eligendi architecto ut, molestiae eum velit optio labore dolorem possimus voluptatem quaerat deserunt delectus ipsam.</p>
+            <Col md={6} className="justify-center">
+              <Button className="mt-3 bg-red border-transparent border-0">
+                Add to Card
+              </Button>
+            </Col>
+          </div>
+        </Container>
 
-<Col md={6} className='justify-center'>
-
-        <Button className="mt-3 bg-red border-transparent border-0" >
-                  Veja Onde comprar
-        </Button>
-
-        </Col>
-
-      </div>
-
-  </Container>
-
-<ProductTabs/>
+        {/* <ProductTabs /> */}
 
         <FooterComponent />
       </div>
     </div>
-    );
-  };
+  );
+};
 export default ProductTemplate;
