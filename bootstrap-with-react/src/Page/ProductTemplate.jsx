@@ -1,23 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import {
-  Table,
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Button,
-  Image,
-  InputGroup,
-  Row,
-  Col,
-  Card,
-  Form,
-  Tab,
-  Tabs,
-  Carousel,
-  Placeholder,
-} from "react-bootstrap";
+import { Container, Button, Col } from "react-bootstrap";
 import minipaLogo from "../Images/minipaLogo.png";
 // import NavbarComponent from '../Component/NavbarComponent';
 import FooterComponent from "../Component/FooterComponent";
@@ -94,93 +77,38 @@ const ProductTemplate = () => {
     }
   }, [categoryName, subcategoryName, productName, navData]);
 
-  // useEffect(() => {
-  //   if (categoryName && navData.length > 0) {
-  //     const formattedCategoryName = categoryName
-  //       .replace(/-/g, " ")
-  //       .toLowerCase();
-  //     const category = navData.find(
-  //       (cat) =>
-  //         cat.name.toLowerCase().replace(/-/g, "").replace(/ /g, "") ===
-  //         formattedCategoryName.replace(/-/g, "").replace(/ /g, "")
-  //     );
-
-  //     if (category) {
-  //       if (subcategoryName) {
-  //         const formattedSubcategoryName = subcategoryName
-  //           .replace(/-/g, " ")
-  //           .toLowerCase();
-  //         const animalType = Object.keys(category.subcategory).find(
-  //           (type) => type.toLowerCase() === formattedSubcategoryName
-  //         );
-
-  //         if (animalType) {
-  //           setCategoryData({ ...category, currentSubcategory: animalType });
-  //         } else {
-  //           console.error(`Subcategory not found: ${subcategoryName}`);
-  //           setCategoryData(category);
-  //         }
-  //       } else {
-  //         setCategoryData(category);
-  //       }
-  //     } else {
-  //       console.error(`Category not found: ${categoryName}`);
-  //     }
-  //   } else {
-  //     setCategoryData(null);
-  //   }
-  // }, [categoryName, subcategoryName, navData]);
-
-  // useEffect(() => {
-  //   if (categoryName && subcategoryName && productName) {
-  //     fetch(`/api/products`)
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         console.log("Fetched product data:", data);
-  //         if (!Array.isArray(data)) {
-  //           throw new Error("Fetched data is not an array");
-  //         }
-
-  //         // Format the URL parameters for comparison
-  //         const formattedCategoryName = categoryName
-  //           .replace(/-/g, " ")
-  //           .toLowerCase();
-  //         const formattedSubcategoryName = subcategoryName
-  //           .replace(/-/g, " ")
-  //           .toLowerCase();
-  //         const formattedProductName = productName
-  //           .replace(/-/g, " ")
-  //           .toLowerCase();
-
-  //         // Find the matching product
-  //         const foundProduct = data.find(
-  //           (product) =>
-  //             product.category
-  //               .toLowerCase()
-  //               .replace(/-/g, "")
-  //               .replace(/ /g, "") ===
-  //               formattedCategoryName.replace(/-/g, "").replace(/ /g, "") &&
-  //             product.animalType.toLowerCase() === formattedSubcategoryName &&
-  //             product.name.toLowerCase().replace(/-/g, " ") ===
-  //               formattedProductName
-  //         );
-
-  //         if (foundProduct) {
-  //           setProductData(foundProduct);
-  //           console.log("Found product:", foundProduct);
-  //         } else {
-  //           console.error("Product not found:", productName);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error fetching data:", error);
-  //       });
-  //   }
-  // }, [categoryName, subcategoryName, productName]);
-
   let findImage = null;
   const imagePath = `/ProductImages/${categoryName.toUpperCase()}/${subcategoryName.toUpperCase()}/${productName.toUpperCase()}.jpg`;
   const noImg = `https://placehold.co/600x400`;
+
+  const handleAddToCart = async () => {
+    const userId = localStorage.getItem("userId"); // Retrieve the user ID from local storage or your authentication state
+
+    if (!userId) {
+      alert("Please log in to add items to your cart.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, productId: productData._id }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert("Product added to cart!");
+      } else {
+        alert(data.error || "Failed to add product to cart.");
+      }
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+      alert("An error occurred. Please try again.");
+    }
+  };
 
   // if(Image){
   //   findImage = imagePath;
@@ -239,7 +167,10 @@ const ProductTemplate = () => {
             </p>
 
             <Col md={6} className="justify-center">
-              <Button className="mt-3 bg-red border-transparent border-0">
+              <Button
+                onClick={handleAddToCart}
+                className="mt-3 bg-red border-transparent border-0"
+              >
                 Add to Card
               </Button>
             </Col>

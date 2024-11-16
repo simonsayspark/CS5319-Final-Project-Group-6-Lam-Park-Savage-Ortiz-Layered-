@@ -3,17 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./Page/LandingPage";
 import Contact from "./Page/Contact";
 import AboutUs from "./Page/AboutUs";
-import Catalog from "./Page/Catalog";
-import WhereToBuy from "./Page/WhereToBuy";
 import CategoryTemplate from "./Page/CategoryTemplate";
 import categoriesData from "./CategoriesJSON/productCategory.json";
-import ProductsPage from "./Page/ProductsPage";
 import ProductTemplate from "./Page/ProductTemplate";
-import Astech from "./Page/Astech";
-import LabCollab from "./Page/LabCollab";
-import Questions from "./Page/Questions";
-import LocacaoInstrumentos from "./Page/LocacaoInstrumentos";
-import AuthorizedDealers from "./Page/AuthorizedDealers";
+import LoginPage from "./Page/Login";
+import RegisterPage from "./Page/Register";
+import ShoppingCart from "./Page/ShoppingCart";
+import ProfilePage from "./Page/ProfilePage";
 
 function App() {
   return (
@@ -22,24 +18,29 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/Contato" element={<Contact />} />
         <Route path="/SobreNos" element={<AboutUs />} />
-        <Route path="/Catalogo" element={<Catalog />} />
-        <Route path="/OndeComprar" element={<WhereToBuy />} />
-        <Route path="/Servicios/AsistenciaTecnica" element={<Astech />} />
-        <Route path="/Servicios/PerguntasFrequentes" element={<Questions />} />
-        <Route
+        <Route path="/Login" element={<LoginPage />} />
+        <Route path="/Register" element={<RegisterPage />} />
+        <Route path="/Cart" element={<ShoppingCart />} />
+        <Route path="/Profile" element={<ProfilePage />} />
+
+        {/* <Route path="/Catalogo" element={<Catalog />} /> */}
+        {/* <Route path="/OndeComprar" element={<WhereToBuy />} /> */}
+        {/* <Route path="/Servicios/AsistenciaTecnica" element={<Astech />} />
+        <Route path="/Servicios/PerguntasFrequentes" element={<Questions />} /> */}
+        {/* <Route
           path="/Servicios/LaboratorioDeCalibracao"
           element={<LabCollab />}
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/Servicios/LocacaoInstrumentos"
           element={<LocacaoInstrumentos />}
-        />
-        \
-        <Route
+        /> */}
+
+        {/* <Route
           path="/Servicios/RedeDeAutorizadas"
           element={<AuthorizedDealers />}
-        />
-        <Route path="/Produtos" element={<ProductsPage />} />
+        /> */}
+        {/* <Route path="/Produtos" element={<ProductsPage />} /> */}
         {categoriesData.map((category) => (
           <React.Fragment key={category.id}>
             <Route

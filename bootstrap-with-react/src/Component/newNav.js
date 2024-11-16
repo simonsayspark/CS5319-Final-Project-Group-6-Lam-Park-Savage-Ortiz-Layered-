@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Dropdown,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { FiUser, FiShoppingCart } from "react-icons/fi";
 import minipaLogo from "../Images/minipaLogo.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.scss";
@@ -18,25 +11,12 @@ import MegaMenu from "./MegaMenu";
 const NewNav = ({ navData }) => {
   const [showMegaMenu, setShowMegaMenu] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // Check if the user is logged in
   useEffect(() => {
-    const handleScroll = () => {
-      const topNavbar = document.querySelector(".top-navbar");
-      const mainNavbar = document.querySelector(".main-navbar");
-      if (window.scrollY > 40) {
-        topNavbar.classList.add("hidden");
-        mainNavbar.classList.add("top");
-      } else {
-        topNavbar.classList.remove("hidden");
-        mainNavbar.classList.remove("top");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
   }, []);
 
   const handleMouseEnterMegaMenu = () => {
@@ -53,6 +33,13 @@ const NewNav = ({ navData }) => {
 
   const handleMouseLeaveDropdown = () => {
     setShowDropdown(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    setIsLoggedIn(false);
+    window.location.reload();
   };
 
   return (
@@ -73,7 +60,7 @@ const NewNav = ({ navData }) => {
         <Container>
           <Navbar.Toggle aria-controls="navbarNav" />
           <Navbar.Collapse id="navbarNav">
-            <Nav className="ms-auto m-3">
+            <Nav className="ms-auto m-3 align-items-center">
               <Nav.Item>
                 <Nav.Link href="/" className="text-black">
                   Home
@@ -95,11 +82,40 @@ const NewNav = ({ navData }) => {
                 </Nav.Link>
               </Nav.Item>
 
-              <Nav.Item>
-                <Nav.Link className="text-black" href="/Contato">
-                  Contact Us
-                </Nav.Link>
-              </Nav.Item>
+              {/* Log In / User Icon */}
+              {isLoggedIn ? (
+                <>
+                  {/* Shopping Cart Icon */}
+                  <Nav.Item style={{ paddingLeft: "20px" }}>
+                    <Nav.Link as={Link} to="/Cart">
+                      <FiShoppingCart className="text-black" size={24} />
+                    </Nav.Link>
+                  </Nav.Item>
+
+                  {/* User Icon with Dropdown */}
+                  <NavDropdown
+                    title={<FiUser className="text-black" size={24} />}
+                    id="user-dropdown"
+                    align="end"
+                    className="p-4"
+                  >
+                    <NavDropdown.Item as={Link} to="/Profile">
+                      Profile
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleLogout}>
+                      Log Out
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              ) : (
+                <Nav.Item>
+                  <Nav.Link href="/Login">
+                    <button className="btn btn-primary text-white">
+                      Log In
+                    </button>
+                  </Nav.Link>
+                </Nav.Item>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
