@@ -155,76 +155,7 @@ export default function LandingPage() {
         </Carousel>
       </Container>
 
-      <Container
-        fluid
-        id="News"
-        className="mt-5 d-flex justify-center bg-offWhite"
-      >
-        <Col md={9}>
-          <Row className="p-0" style={{ margin: "auto" }}>
-            <Col md={4} className="mt-5 mb-2 text-center rounded-3">
-              <img
-                src="https://placehold.co/400x225"
-                style={{
-                  maxWidth: "95%",
-                  maxHeight: "95%",
-                  objectFit: "cover",
-                }}
-                alt=""
-              />
-            </Col>
-            <Col md={4} className="mt-5 mb-2 text-center rounded-3">
-              <img
-                src="https://placehold.co/400x225"
-                style={{
-                  maxWidth: "95%",
-                  maxHeight: "95%",
-                  objectFit: "cover",
-                }}
-                alt=""
-              />
-            </Col>
-            <Col md={4} className="mt-5 mb-2 text-center rounded-3">
-              <img
-                src="https://placehold.co/400x225"
-                style={{
-                  maxWidth: "95%",
-                  maxHeight: "95%",
-                  objectFit: "cover",
-                }}
-                alt=""
-              />
-            </Col>
-          </Row>
-
-          <Row className="p-0 align-middle">
-            <Col md={8} className="mt-3 mb-5 text-center rounded-3">
-              <img
-                src="https://placehold.co/850x425"
-                style={{ maxWidth: "95%", maxHeight: "95%", objectFit: "Col" }}
-                alt=""
-              />
-            </Col>
-
-            <Col
-              md={4}
-              className="mt-3 text-center mb-5 rounded-3 align-items-center"
-            >
-              <Link to={`/SobreNos`}>
-                <img
-                  src="https://placehold.co/400x225"
-                  style={{
-                    maxWidth: "95%",
-                    maxHeight: "95%",
-                    objectFit: "Col",
-                  }}
-                  alt=""
-                />
-              </Link>
-            </Col>
-          </Row>
-        </Col>
-      </Container>
+     
 
       <FooterComponent />
     </div>
