@@ -1,4 +1,3 @@
-import placeholderImage from "../Images/landingPageTest3.jpg";
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -54,6 +53,15 @@ export default function LandingPage() {
 
   const chunkedData = chunkArray(navData, getChunkSize());
 
+  const getCategoryImagePath = (categoryName) => {
+    const formattedName = categoryName
+      .toLowerCase()
+      .replace(/ /g, "-")
+      .replace(/,/g, "");
+
+    return `${process.env.PUBLIC_URL}/categories/${formattedName}.jpg`;
+  };
+
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
 
@@ -70,7 +78,7 @@ export default function LandingPage() {
       >
         <Carousel.Item className="justify-content-center mt-5 w-100">
           <Col className="mb-4 mt-5" style={{ maxHeight: "800px" }}>
-            <img src="https://placehold.co/700x1000" width={"100%"} alt="" />
+            <img src="homepage2.jpg" width={"100%"} alt="" />
           </Col>
         </Carousel.Item>
         <Carousel.Item className="justify-content-center mt-5 w-100">
@@ -78,7 +86,7 @@ export default function LandingPage() {
             className="mb-4 mt-5"
             style={{ maxHeight: "800px", width: "100%" }}
           >
-            <img src="https://placehold.co/700x1000" width={"100%"} alt="" />
+            <img src="homepage1.jpg" width={"100%"} alt="" />
           </Col>
         </Carousel.Item>
         <Carousel.Item className="justify-content-center mt-5 w-100">
@@ -86,7 +94,7 @@ export default function LandingPage() {
             className="mb-4 mt-5"
             style={{ maxHeight: "800px", width: "100%" }}
           >
-            <img src="https://placehold.co/700x1000" width={"100%"} alt="" />
+            <img src="homepage3.jpg" width={"100%"} alt="" />
           </Col>
         </Carousel.Item>
         <Carousel.Item className="justify-content-center mt-5 w-100">
@@ -94,7 +102,7 @@ export default function LandingPage() {
             className="mb-4 mt-5"
             style={{ maxHeight: "800px", width: "100%" }}
           >
-            <img src="https://placehold.co/700x1000" width={"100%"} alt="" />
+            <img src="homepage4.jpg" width={"100%"} alt="" />
           </Col>
         </Carousel.Item>
       </Carousel>
@@ -110,7 +118,7 @@ export default function LandingPage() {
         >
           {chunkedData.map((categoryChunk, index) => (
             <Carousel.Item key={index}>
-              <Row className="justify-content-center mt-5">
+              <Row className="justify-content-center mt-5 ">
                 {categoryChunk.map((category, categoryIndex) => (
                   <Col
                     key={categoryIndex}
@@ -131,7 +139,7 @@ export default function LandingPage() {
                       >
                         <Card.Img
                           variant="top"
-                          src={placeholderImage}
+                          src={getCategoryImagePath(category.name)}
                           style={{ maxHeight: "100px", objectFit: "fill" }}
                         />
                         <Card.Body className="line">
@@ -147,76 +155,7 @@ export default function LandingPage() {
         </Carousel>
       </Container>
 
-      <Container
-        fluid
-        id="News"
-        className="mt-5 d-flex justify-center bg-offWhite"
-      >
-        <Col md={9}>
-          <Row className="p-0" style={{ margin: "auto" }}>
-            <Col md={4} className="mt-5 mb-2 text-center rounded-3">
-              <img
-                src="https://placehold.co/400x225"
-                style={{
-                  maxWidth: "95%",
-                  maxHeight: "95%",
-                  objectFit: "cover",
-                }}
-                alt=""
-              />
-            </Col>
-            <Col md={4} className="mt-5 mb-2 text-center rounded-3">
-              <img
-                src="https://placehold.co/400x225"
-                style={{
-                  maxWidth: "95%",
-                  maxHeight: "95%",
-                  objectFit: "cover",
-                }}
-                alt=""
-              />
-            </Col>
-            <Col md={4} className="mt-5 mb-2 text-center rounded-3">
-              <img
-                src="https://placehold.co/400x225"
-                style={{
-                  maxWidth: "95%",
-                  maxHeight: "95%",
-                  objectFit: "cover",
-                }}
-                alt=""
-              />
-            </Col>
-          </Row>
-
-          <Row className="p-0 align-middle">
-            <Col md={8} className="mt-3 mb-5 text-center rounded-3">
-              <img
-                src="https://placehold.co/850x425"
-                style={{ maxWidth: "95%", maxHeight: "95%", objectFit: "Col" }}
-                alt=""
-              />
-            </Col>
-
-            <Col
-              md={4}
-              className="mt-3 text-center mb-5 rounded-3 align-items-center"
-            >
-              <Link to={`/SobreNos`}>
-                <img
-                  src="https://placehold.co/400x225"
-                  style={{
-                    maxWidth: "95%",
-                    maxHeight: "95%",
-                    objectFit: "Col",
-                  }}
-                  alt=""
-                />
-              </Link>
-            </Col>
-          </Row>
-        </Col>
-      </Container>
+     
 
       <FooterComponent />
     </div>
