@@ -52,13 +52,16 @@ const ProductCart = ({ product, quantity, updateQuantity, removeItem }) => {
           {/* Actions */}
           <Col xs={12} className="d-flex justify-content-between mt-3">
             <Button
-              variant="link"
-              className="text-danger"
+              variant="outline-danger"
+              className="text-danger custom-button"
               onClick={() => removeItem(product._id)}
             >
               <FiTrash2 /> Remove
             </Button>
-            <Button variant="link" className="text-secondary">
+            <Button
+              variant="outline-secondary"
+              className="text-secondary custom-button"
+            >
               <FiBookmark /> Save for later
             </Button>
           </Col>

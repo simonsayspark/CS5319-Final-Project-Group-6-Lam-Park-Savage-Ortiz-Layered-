@@ -44,8 +44,8 @@ const ShoppingCart = () => {
     0
   );
   const shipping = 16.0;
-  const vat = subtotal * 0.2;
-  const total = subtotal + shipping + vat;
+  const tax = subtotal * 0.0625;
+  const total = subtotal + shipping + tax;
 
   const updateQuantity = (id, amount) => {
     setCartItems((prevItems) =>
@@ -131,7 +131,7 @@ const ShoppingCart = () => {
         <div className="p-2"></div>
         <Container className="mb-2 mt-2 d-flex flex-row justify-between">
           <Col md={7} className="border-right">
-            <div className="space-y-6 flex-grow">
+            <div id="cart-items-container" className="space-y-6 flex-grow overflow-auto">
               {cartItems.map((item) => (
                 <ProductCart
                   key={item._id}
@@ -144,24 +144,24 @@ const ShoppingCart = () => {
             </div>
           </Col>
 
-          <div className="w-full p-6 bg-gray-50 rounded-lg shadow-md">
+          <div id="order-summary" className="w-full p-6 bg-gray-50 rounded-lg shadow-md ml-10" style={{ maxWidth: '300px' }}>
             <div className="border-b pb-4 mb-4">
               <h3 className="text-xl font-bold">Order Summary</h3>
             </div>
             <div className="flex justify-between text-lg">
-              <span>Subtotal:</span>
+              <span>Subtotal: </span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-lg">
-              <span>Shipping:</span>
+              <span>Shipping: </span>
               <span>${shipping.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-lg">
-              <span>VAT (20%):</span>
-              <span>${vat.toFixed(2)}</span>
+              <span>Tax: </span>
+              <span>${tax.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-xl font-bold mt-4">
-              <span>Total:</span>
+              <span>Total: </span>
               <span>${total.toFixed(2)}</span>
             </div>
 

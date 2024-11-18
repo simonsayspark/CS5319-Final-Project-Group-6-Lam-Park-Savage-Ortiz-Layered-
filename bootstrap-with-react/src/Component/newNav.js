@@ -77,7 +77,7 @@ const NewNav = ({ navData }) => {
                 {showMegaMenu && <MegaMenu categories={navData} />}
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className="text-black" href="/SobreNos">
+                <Nav.Link className="text-black" href="/AboutUs">
                   About Us
                 </Nav.Link>
               </Nav.Item>
