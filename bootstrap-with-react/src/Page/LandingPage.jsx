@@ -1,4 +1,3 @@
-import placeholderImage from "../Images/landingPageTest3.jpg";
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -54,6 +53,15 @@ export default function LandingPage() {
 
   const chunkedData = chunkArray(navData, getChunkSize());
 
+  const getCategoryImagePath = (categoryName) => {
+    const formattedName = categoryName
+      .toLowerCase()
+      .replace(/ /g, "-")
+      .replace(/,/g, "");
+
+    return `${process.env.PUBLIC_URL}/categories/${formattedName}.jpg`;
+  };
+
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
 
@@ -70,7 +78,7 @@ export default function LandingPage() {
       >
         <Carousel.Item className="justify-content-center mt-5 w-100">
           <Col className="mb-4 mt-5" style={{ maxHeight: "800px" }}>
-            <img src="https://placehold.co/700x1000" width={"100%"} alt="" />
+            <img src="homepage2.jpg" width={"100%"} alt="" />
           </Col>
         </Carousel.Item>
         <Carousel.Item className="justify-content-center mt-5 w-100">
@@ -78,7 +86,7 @@ export default function LandingPage() {
             className="mb-4 mt-5"
             style={{ maxHeight: "800px", width: "100%" }}
           >
-            <img src="https://placehold.co/700x1000" width={"100%"} alt="" />
+            <img src="homepage1.jpg" width={"100%"} alt="" />
           </Col>
         </Carousel.Item>
         <Carousel.Item className="justify-content-center mt-5 w-100">
@@ -86,7 +94,7 @@ export default function LandingPage() {
             className="mb-4 mt-5"
             style={{ maxHeight: "800px", width: "100%" }}
           >
-            <img src="https://placehold.co/700x1000" width={"100%"} alt="" />
+            <img src="homepage3.jpg" width={"100%"} alt="" />
           </Col>
         </Carousel.Item>
         <Carousel.Item className="justify-content-center mt-5 w-100">
@@ -94,7 +102,7 @@ export default function LandingPage() {
             className="mb-4 mt-5"
             style={{ maxHeight: "800px", width: "100%" }}
           >
-            <img src="https://placehold.co/700x1000" width={"100%"} alt="" />
+            <img src="homepage4.jpg" width={"100%"} alt="" />
           </Col>
         </Carousel.Item>
       </Carousel>
@@ -110,7 +118,7 @@ export default function LandingPage() {
         >
           {chunkedData.map((categoryChunk, index) => (
             <Carousel.Item key={index}>
-              <Row className="justify-content-center mt-5">
+              <Row className="justify-content-center mt-5 ">
                 {categoryChunk.map((category, categoryIndex) => (
                   <Col
                     key={categoryIndex}
@@ -131,7 +139,7 @@ export default function LandingPage() {
                       >
                         <Card.Img
                           variant="top"
-                          src={placeholderImage}
+                          src={getCategoryImagePath(category.name)}
                           style={{ maxHeight: "100px", objectFit: "fill" }}
                         />
                         <Card.Body className="line">
