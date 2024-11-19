@@ -11,9 +11,10 @@
 ## Comparision between two architecture styles (Ben)
 //Elaborate in detail on the difference between the architecture designs for both
 candidate architecture styles
+
 ## Rationale on final decision (Simon)
-//information you think is helpful for the grader to understand the rationales of
-your architecture design decisions.
+For the PawPaw Marketplace project, layered architecture emerges as the most practical solution due to its simplicity and ability to meet the project's immediate requirements. This approach structures the application into distinct layers, including presentation, business logic, and data access, promoting a clean separation of concerns. This design not only facilitates easier development and testing but also simplifies ongoing maintenance.The project's current scope revolves around essential features such as product browsing, cart management, and order processing. These functionalities do not demand the complexity of real-time updates or the scalability of more intricate systems. By opting for layered architecture, the team benefits from a streamlined implementation process with minimal overhead, ensuring faster delivery. Furthermore, this architecture provides enough flexibility to accommodate future upgrades without significant rework. In conclusion, layered architecture offers more balance of efficiency, clarity, and scalability for this stage of development of the PawPaw Marketplace.
+
 ## How to compile and excute the code (Tran)
 ### Prerequisites:
 - Install Node.js and npm or yarn (latest version recommended).
