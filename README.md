@@ -37,10 +37,10 @@ The **PawPaw Market** is a web application designed to simplify the process of p
 ![Alt text](./EventBased.png "Title")
 
 
-## Comparision between two architecture styles (Ben)
-## Layered Architecture
+## Comparison between two architecture styles (Ben)
+### Layered Architecture
 
-### Pros:
+#### Pros:
 1. **Separation of Concerns**:  
    In a layered architecture, responsibilities are divided into layers (e.g., presentation, business logic, data access). This makes the system easier to understand and maintain. In the PawPaw Market, the UI layer can focus solely on user interactions, while the backend handles business logic and database queries. This made it easier to decide on where to handle specific functionality for our project.
 
@@ -53,7 +53,7 @@ The **PawPaw Market** is a web application designed to simplify the process of p
 5. **Flexibility**:  
    The modularity of layers allows for swapping out implementations. For example, switching from a relational database to a NoSQL database only impacts the data access layer. This in particular was useful from when we switched from SQL to MongoDB.
 
-### Cons:
+#### Cons:
 1. **Latency**:  
    Layered architectures introduce additional overhead due to communication between layers. In a real-time scenario like a product search in the Pet Marketplace, latency could slow down query results when selecting categories, negatively impacting user experience.
 
@@ -68,9 +68,9 @@ The **PawPaw Market** is a web application designed to simplify the process of p
 
 ---
 
-## Event-Based Architecture
+### Event-Based Architecture
 
-### Pros:
+#### Pros:
 1. **Real-Time Updates**:  
    Event-based architectures excel in scenarios requiring real-time feedback. As such, after deployment, if any real-time updates need to be made, such as quantity of inventory, the user can be notified easily if the item is running low or is out of stock.
 
@@ -83,7 +83,7 @@ The **PawPaw Market** is a web application designed to simplify the process of p
 4. **Fault Tolerance**:  
    Event-based architectures can recover from failures. If the notification service in the PawPaw Market fails temporarily, it can retry sending alerts without affecting the rest of the system.
 
-### Cons:
+#### Cons:
 1. **Complexity**:  
    Event-driven systems require additional infrastructure (We use RabbitMQ), which increases setup and maintenance costs. For something like PawPaw Market, this adds complexity to the entire application.
 
