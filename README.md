@@ -5,7 +5,8 @@
 ## Layer Architecture (Oliver)
 //just add diagram and related information if needed
 ## Event-based Architecture (Simon)
-//just add diagram and related information if needed
+![Alt text](EventBased "Title")
+
 ## Comparision between two architecture styles (Ben)
 //Elaborate in detail on the difference between the architecture designs for both
 candidate architecture styles
