@@ -12,4 +12,4 @@ candidate architecture styles
 ## Rationale on final decision (Simon)
 //information you think is helpful for the grader to understand the rationales of
 your architecture design decisions.
-## How to compile and excute the code
+## How to compile and excute the code (Tran)
