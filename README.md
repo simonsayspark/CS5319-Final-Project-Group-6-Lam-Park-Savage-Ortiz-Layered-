@@ -28,7 +28,7 @@ The **PawPaw Market** is a web application designed to simplify the process of p
 3. **View Shopping Cart**  
    The shopping cart provides users with a clear overview of all selected items. It displays product details, quantities, and total costs. Users can modify the cart by adding, removing, or updating items before proceeding to checkout.
 
-4. **Place Order**
+4. **Place Order**</br>
    After adding items to their shopping cart, users can place their order to purchase items.
 
 ## Layer Architecture (Oliver)
