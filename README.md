@@ -130,6 +130,9 @@ yarn run dev
 ```
 The server will start on the port specified in server.js (default is usually http://localhost:8000).
 
+**Screenshot of compile successfully**
+![alt text](image.png)
+
 ### Frontend Setup (React)
 Navigate to the React directory:
 ```
